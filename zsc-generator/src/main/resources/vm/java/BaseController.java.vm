@@ -1,0 +1,86 @@
+package ${packageName}.controller.${moduleName}
+
+import com.zsc.common.domain.ApiResult;
+import com.zsc.common.domain.DataApiResult;
+import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.*;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * ${functionName}Controller
+ *
+ * @author zsc
+ * @date ${datetime}
+ */
+
+public abstract class Base${ClassName}Controller {
+
+    @Autowired protected ${ClassName}Service service;
+         
+    /**
+     * 删除id列表对应的数据项
+     *
+     * @param ids 数据主键id列表
+     * @return
+     */
+    @DeleteMapping("")
+    @Operation(description = "删除id列表对应的数据项")
+    @Transactional
+    public ApiResult deleteItemByIds(
+            @RequestBody @Parameter(description = "数据主键id列表") java.util.List<Long> ids) {
+        long delCount = 0;
+        for (var id : ids) {
+            delCount += service.deleteItemById(id);
+        }
+        Assert.isTrue(delCount == ids.size(), "删除数据失败");
+        return ApiResult.successResult();
+    }
+
+    /**
+     * 取得id对应的数据项
+     *
+     * @param id 数据主键id
+     * @return
+     */
+    @GetMapping("{id}")
+    @Operation(description = "取得id对应的数据项")
+    public DataApiResult<${ClassName}> getItemById(
+            @PathVariable @Parameter(description = "数据主键id") Long id) {
+        var re = service.getItemById(id);
+        return DataApiResult.success(re);
+    }
+
+    /**
+     * 新增一个记录
+     *
+     * @param dataItem 要保存的数据对象
+     * @return
+     */
+    @PutMapping("")
+    @Operation(description = "新增一个记录")
+    public DataApiResult<${ClassName}> insertItem(
+            @RequestBody @Parameter(description = "要保存的数据对象") ${className} dataItem) {
+        Assert.notNull(dataItem, "参数dataItem不允许为空");
+        var re = service.insertItem(dataItem);
+        return DataApiResult.success(re);
+    }
+    
+    /**
+     * 更新数据对象
+     *
+     * @param dataItem 要保存的数据对象
+     * @return
+     */
+    @PostMapping("")
+    @Operation(description = "更新数据对象")
+    @Transactional
+    public DataApiResult<${ClassName}> updateItem(
+            @RequestBody @Parameter(description = "要保存的数据对象") ${className} dataItem) {
+        Assert.notNull(dataItem, "参数dataItem不允许为空");
+        var re = service.updateItem(dataItem);
+        return DataApiResult.success(re);
+    }
+}

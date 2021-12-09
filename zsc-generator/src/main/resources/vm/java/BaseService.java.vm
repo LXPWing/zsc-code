@@ -1,0 +1,13 @@
+package ${packageName}.service.${moduleName}
+
+import org.springframework.stereotype.Service;
+
+/**
+ * ${functionName}service
+ *
+ * @author zsc
+ * @date ${datetime}
+ */
+
+@Service
+public class ${ClassName}Service extends ZscService<${ClassName},${ClassName}Repository> {}

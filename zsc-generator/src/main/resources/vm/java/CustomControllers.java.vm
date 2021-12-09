@@ -1,0 +1,15 @@
+package ${packageName}.controller.${moduleName}
+
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * ${functionName}controller
+ *
+ * @author zsc
+ * @date ${datetime}
+ */
+
+@RequestMapping("${api}")
+@RestController
+public class ${ClassName}Controller extends Base${ClassName}Controller {}
