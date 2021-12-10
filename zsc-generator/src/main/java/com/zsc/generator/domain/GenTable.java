@@ -1,7 +1,9 @@
 package com.zsc.generator.domain;
 
 import com.zsc.common.domain.BaseEntity;
+import lombok.Data;
 
+import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
  * @author : xingpeng
  * @date : 2021-12-09 19:13
  **/
+@Data
+@Entity
 public class GenTable extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -45,67 +49,4 @@ public class GenTable extends BaseEntity {
     @Valid
     private List<GenTableColumn> columns;
 
-    public Long getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(Long tableId) {
-        this.tableId = tableId;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getTableComment() {
-        return tableComment;
-    }
-
-    public void setTableComment(String tableComment) {
-        this.tableComment = tableComment;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public List<GenTableColumn> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<GenTableColumn> columns) {
-        this.columns = columns;
-    }
-
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public String getFunctionName() {
-        return functionName;
-    }
-
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
 }
