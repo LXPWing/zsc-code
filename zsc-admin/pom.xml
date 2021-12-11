@@ -35,5 +35,11 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.zsc</groupId>
+            <artifactId>zsc-generator</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

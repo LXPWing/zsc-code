@@ -1,6 +1,7 @@
 package com.zsc.generator;
 
 import com.zsc.generator.domain.GenTable;
+import com.zsc.generator.domain.GenTableColumn;
 import com.zsc.generator.utils.VelocityInitializer;
 import com.zsc.generator.utils.VelocityUtils;
 import org.apache.velocity.Template;
@@ -12,6 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,8 @@ public class VelocityTest {
     @Test
     public void testVelocity() throws FileNotFoundException {
         Map<String, String> dataMap = new LinkedHashMap<>();
+        List ls = new ArrayList();
+        GenTableColumn tableColumn = new GenTableColumn();
         GenTable table = new GenTable();
         table.setClassName("Test");
         table.setModuleName("sys");

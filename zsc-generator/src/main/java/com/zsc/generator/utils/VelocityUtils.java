@@ -6,6 +6,7 @@ import com.zsc.generator.domain.GenTableColumn;
 import org.apache.velocity.VelocityContext;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -111,7 +112,12 @@ public class VelocityUtils {
     public static HashSet<String> getImportList(List<GenTableColumn> columns) {
         HashSet<String> importList = new HashSet<String>();
         for (GenTableColumn column : columns) {
-            // if ()
+             if (column.getJavaType().equals("LocalDateTime")) {
+                 importList.add("import java.time.LocalDateTime");
+             }
+             else if (column.getJavaType().equals("BigDecimal")) {
+                 importList.add("java.math.BigDecimal");
+             }
         }
         return importList;
     }

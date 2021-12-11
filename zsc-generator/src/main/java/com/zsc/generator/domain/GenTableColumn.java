@@ -2,8 +2,9 @@ package com.zsc.generator.domain;
 
 import com.zsc.common.domain.BaseEntity;
 import lombok.Data;
-
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -12,12 +13,10 @@ import javax.validation.constraints.NotBlank;
  **/
 @Data
 @Entity
+@Table(name = "gen_table_column")
 public class GenTableColumn extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    /** 编号 */
-    private Long columnId;
 
     /** 归属表编号 */
     private Long tableId;
@@ -52,17 +51,4 @@ public class GenTableColumn extends BaseEntity {
 
     /** 排序 */
     private Integer sort;
-
-//    public boolean isSuperColumn()
-//    {
-//        return isSuperColumn(this.javaField);
-//    }
-
-//    public static boolean isSuperColumn(String javaField)
-//    {
-//        return StringUtils.equalsAnyIgnoreCase(javaField,
-//                // BaseEntity
-//                "createBy", "createTime", "updateBy", "updateTime");
-//    }
-
 }

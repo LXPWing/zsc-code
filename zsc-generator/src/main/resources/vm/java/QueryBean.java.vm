@@ -1,0 +1,10 @@
+package ${packageName}.entity
+
+import lombok.Data;
+
+public class ${ClassName}QueryBean {
+    @Data
+    public static class QueryBean {
+        
+    }
+}

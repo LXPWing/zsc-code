@@ -2,8 +2,9 @@ package com.zsc.generator.domain;
 
 import com.zsc.common.domain.BaseEntity;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -14,12 +15,10 @@ import java.util.List;
  **/
 @Data
 @Entity
+@Table(name = "gen_table")
 public class GenTable extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    /** 编号 */
-    private Long tableId;
 
     /** 生成模块名 */
     @NotBlank(message = "生成模块名不能为空")
@@ -47,6 +46,7 @@ public class GenTable extends BaseEntity {
 
     /** 表列信息 */
     @Valid
+    @OneToMany(targetEntity = GenTableColumn.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "table_id",referencedColumnName = "id")
     private List<GenTableColumn> columns;
-
 }
