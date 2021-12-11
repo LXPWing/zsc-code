@@ -1,5 +1,7 @@
 package com.zsc.generator.service;
 
+import com.zsc.common.domain.ApiResult;
+import com.zsc.generator.domain.GenTable;
 import com.zsc.generator.domain.GenTableColumn;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public interface IGenTableService {
      * 根据ID删除Table
      * @param ids
      */
-    public void deleteGenTableByIds(Long[] ids);
+    public ApiResult deleteGenTableByIds(List<Long> ids);
 
     /**
      * 预览代码
@@ -30,4 +32,10 @@ public interface IGenTableService {
      * @return
      */
     public Map<String, String> previewCode(Long id);
+
+    /**
+     * 保存表数据
+     * @param table
+     */
+    public GenTable saveGenTableInfo(GenTable table);
 }

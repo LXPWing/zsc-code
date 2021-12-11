@@ -2,9 +2,13 @@ package ${packageName}.entity
 
 import lombok.Data;
 
-public class ${ClassName}QueryBean {
+public class ${ClassName}QueryBean extends BasePageQueryBean{
     @Data
     public static class QueryBean {
-        
+
+        #foreach ($column in $columns)
+            /**$column.columnComment **/
+            private $column.javaType $column.javaField;
+        #end
     }
 }

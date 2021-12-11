@@ -23,7 +23,7 @@ public class ApiResult implements Serializable {
      * @param code 返回代码
      * @param message 返回错误消息
      */
-    public  ApiResult(int code, String message) {
+    public ApiResult(int code, String message) {
         this.code = code;
         this.message = message;
     }
