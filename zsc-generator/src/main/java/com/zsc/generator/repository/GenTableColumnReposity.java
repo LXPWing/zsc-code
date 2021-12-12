@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface GenTableColumnReposity extends JpaRepository<GenTableColumn, Long> {
+    void deleteByTableId(Long id);
 }

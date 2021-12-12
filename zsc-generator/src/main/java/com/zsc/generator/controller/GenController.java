@@ -7,10 +7,9 @@ import com.zsc.generator.domain.GenTable;
 import com.zsc.generator.service.IGenTableColumnService;
 import com.zsc.generator.service.IGenTableService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : xingpeng
@@ -31,9 +30,37 @@ public class GenController {
 //
 //    }
 
+    /**
+     * 保存GenTable
+     * @param genTable
+     * @return
+     */
     @PutMapping("/db/save")
     public DataApiResult<GenTable> dataSave(GenTable genTable) {
-        var re = iGenTableService.saveGenTableInfo(genTable);
+        var re = iGenTableService.saveGenTable(genTable);
         return DataApiResult.success(re);
     }
+
+    /**
+     * 删除GenTable
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("")
+    public ApiResult deleteGenTable(List<Long> ids){
+        iGenTableService.deleteGenTableByIds(ids);
+        return DataApiResult.successResult();
+    }
+
+    /**
+     * 更新GenTable
+     * @param genTable
+     * @return
+     */
+    @PutMapping("/db/update")
+    public DataApiResult<GenTable> updateGenTable(GenTable genTable) {
+        var re = iGenTableService.updateGenTable(genTable);
+        return DataApiResult.success(re);
+    }
+
 }

@@ -37,5 +37,12 @@ public interface IGenTableService {
      * 保存表数据
      * @param table
      */
-    public GenTable saveGenTableInfo(GenTable table);
+    public GenTable saveGenTable(GenTable table);
+
+    /**
+     * 更新GenTable
+     * @param table
+     * @return
+     */
+    public GenTable updateGenTable(GenTable table);
 }
