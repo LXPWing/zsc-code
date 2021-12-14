@@ -60,4 +60,9 @@ public class GenTableServiceImpl implements IGenTableService{
         GenTable genTable = genTableRepository.save(table);
         return genTable;
     }
+
+    @Override
+    public GenTable getGenTableById(Long id) {
+        return null;
+    }
 }

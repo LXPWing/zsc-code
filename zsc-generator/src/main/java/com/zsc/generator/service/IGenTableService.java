@@ -45,4 +45,11 @@ public interface IGenTableService {
      * @return
      */
     public GenTable updateGenTable(GenTable table);
+
+    /**
+     * 根据Table_id找Tale
+     * @param id
+     * @return
+     */
+    public GenTable getGenTableById(Long id);
 }

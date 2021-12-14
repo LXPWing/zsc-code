@@ -25,10 +25,25 @@ public class GenController {
     @Autowired
     private IGenTableService iGenTableService;
 
+//    /**
+//     * 查询
+//     * @param genTable
+//     * @return
+//     */
 //    @GetMapping("/db/list")
 //    public TableDataInfo dataList(GenTable genTable) {
 //
 //    }
+
+    /**
+     * 根据Id找GenTable
+     * @param id
+     * @return
+     */
+    @GetMapping("/db/{id}")
+    public DataApiResult<GenTable> getGenTable(@PathVariable Long id){
+        return null;
+    }
 
     /**
      * 保存GenTable
