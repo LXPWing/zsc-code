@@ -1,0 +1,11 @@
+import BaseEntity from '@/zsc/entity/base/base-entity'
+
+/**
+ * 带有时间的实体
+ */
+export default interface HasTimeEntity extends BaseEntity {
+    /** 创建时间 */
+    created?: string | Date;
+    /** 修改时间 */
+    moditime?: string | Date;
+}

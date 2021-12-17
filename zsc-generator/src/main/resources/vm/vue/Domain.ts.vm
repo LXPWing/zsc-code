@@ -1,0 +1,11 @@
+#foreach ($import in $importVueList)
+${import};
+#end
+export default interface ${ClassName} #if(${extendsName})
+    extends ${extendsName}
+#end {
+    #foreach ($column in $columns)
+        /**$column.columnComment **/
+        $column.javaField?: $column.tsType;
+    #end
+}

@@ -1,0 +1,4 @@
+import { EnumDefine } from '@/libs/api-request'
+
+const ${EnumName}: EnumDefine = {
+}

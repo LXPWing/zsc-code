@@ -1,0 +1,12 @@
+import HasTimeEntity from '@/zsc/entity/base/has-time-entity'
+
+export default interface HasCreatorAndUserEntity extends HasTimeEntity {
+    /** 创建者ID */
+    creator?: number;
+    /** 最后修改者ID */
+    lastMender?: number;
+    /** 创建者名称 */
+    creatorName?: string;
+    /** 修改者名称 */
+    menderName?: string;
+}

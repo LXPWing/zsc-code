@@ -1,6 +1,6 @@
 package ${packageName}.entity
 
-#foreach ($import in $importList)
+#foreach ($import in $importJavaList)
 import ${import};
 #end
 import io.swagger.annotations.ApiModel;

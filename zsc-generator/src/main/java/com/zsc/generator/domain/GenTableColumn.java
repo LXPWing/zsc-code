@@ -37,6 +37,9 @@ public class GenTableColumn extends BaseEntity {
     @NotBlank(message = "Java属性不能为空")
     private String javaField;
 
+    /**前端类型*/
+    private String tsType;
+
     /** 是否主键（1是） */
     private String isPk;
 

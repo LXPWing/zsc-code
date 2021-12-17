@@ -48,4 +48,9 @@ public class VelocityTest {
         }
         System.out.println(dataMap.values());
     }
+
+    @Test
+    public void output() {
+        System.out.println("import BaseEntity from \'@/xbgcoding/entity/base/base-entity\'");
+    }
 }

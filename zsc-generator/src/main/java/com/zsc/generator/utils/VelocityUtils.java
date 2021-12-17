@@ -5,8 +5,6 @@ import com.zsc.generator.domain.GenTable;
 import com.zsc.generator.domain.GenTableColumn;
 import org.apache.velocity.VelocityContext;
 import org.springframework.util.StringUtils;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +34,11 @@ public class VelocityUtils {
         velocityContext.put("packageName", packageName);
         velocityContext.put("ClassName", genTable.getClassName());
         velocityContext.put("className", StringUtils.uncapitalize(genTable.getClassName()));
-        velocityContext.put("importList", getImportList(genTable.getColumns()));
+        velocityContext.put("importJavaList", getImportListWithJava(genTable.getColumns()));
+
+        HashSet<String> importListWithVue = getImportListWithVue(genTable.getColumns());
+        velocityContext.put("importVueList",importListWithVue);
+        velocityContext.put("extendsName",getExtendsName(importListWithVue));
         velocityContext.put("columns", genTable.getColumns());
         velocityContext.put("table", genTable);
 
@@ -49,6 +51,7 @@ public class VelocityUtils {
      * @return 模板列表
      */
     public static List<String> getTemplateList(){
+        // java
         List<String> templates = new ArrayList<>();
         templates.add("vm/java/BaseController.java.vm");
         templates.add("vm/java/BaseService.java.vm");
@@ -56,6 +59,13 @@ public class VelocityUtils {
         templates.add("vm/java/Domain.java.vm");
         templates.add("vm/java/QueryBean.java.vm");
         templates.add("vm/java/Repository.java.vm");
+
+        // vue
+        templates.add("vm/vue/BaseEntity.ts.vm");
+        templates.add("vm/vue/Controller.ts.vm");
+        templates.add("vm/vue/Domain.ts.vm");
+        templates.add("vm/vue/HasCreatorAndUserEntity.ts.vm");
+        templates.add("vm/vue/HasTimeEntity.ts.vm");
         return templates;
     }
 
@@ -86,7 +96,7 @@ public class VelocityUtils {
         } else if (template.contains("Repository.java.vm")) {
             fileName = String.format("%s/repository/%s.java", javaPath, className);
         }
-        
+
         return fileName;
     }
 
@@ -104,22 +114,69 @@ public class VelocityUtils {
     }
 
     /**
-     * 根据列类型获取导入包
+     * 后端根据列类型获取导入包
      *
      * @param columns 列集合
      * @return 返回需要导入的包列表
      */
-    public static HashSet<String> getImportList(List<GenTableColumn> columns) {
-        HashSet<String> importList = new HashSet<String>();
+    public static HashSet<String> getImportListWithJava(List<GenTableColumn> columns) {
+        HashSet<String> importJavaList = new HashSet<String>();
         for (GenTableColumn column : columns) {
              if (column.getJavaType().equals("LocalDateTime")) {
-                 importList.add("import java.time.LocalDateTime");
+                 importJavaList.add("import java.time.LocalDateTime");
              }
              else if (column.getJavaType().equals("BigDecimal")) {
-                 importList.add("java.math.BigDecimal");
+                 importJavaList.add("java.math.BigDecimal");
              }
         }
-        return importList;
+        return importJavaList;
     }
 
+    /**
+     * 前端根据列类型获取导入包
+     *
+     * @param columns 列集合
+     * @return 返回需要导入的包列表
+     */
+    public static HashSet<String> getImportListWithVue(List<GenTableColumn> columns) {
+        HashSet<String> importVueList = new HashSet<String>();
+        int id = 0;
+        int created = 0;
+        int creator = 0;
+        for (GenTableColumn column : columns) {
+            if (column.getColumnName().equals("id")){
+                id++;
+            } else if (column.getColumnName().equals("created")) {
+                created++;
+            } else if (column.getColumnName().equals("creator")) {
+                creator++;
+            }
+        }
+
+        if (creator==1){
+            importVueList.add("import HasCreatorAndUserEntity from \'@/zsc/entity/base/has-creator-and-user-entity\'");
+            return importVueList;
+        } else if (created == 1) {
+            importVueList.add("import HasTimeEntity from \'@/zsc/entity/base/has-time-entity\'");
+            return importVueList;
+        } else if (id==1) {
+            importVueList.add("import BaseEntity from \'@/zsc/entity/base/base-entity\'");
+            return importVueList;
+        } else {
+            return importVueList;
+        }
+    }
+
+    private static String getExtendsName(HashSet<String> hs){
+        for(String item : hs){
+            if (item.equals("import HasCreatorAndUserEntity from \'@/zsc/entity/base/has-creator-and-user-entity\'")){
+                return "HasCreatorAndUserEntity";
+            } else if (item.equals("import HasTimeEntity from \'@/zsc/entity/base/base-entity\'")) {
+                return "HasTimeEntity";
+            } else if (item.equals("import BaseEntity from \'@/zsc/entity/base/base-entity\'")) {
+                return "BaseEntity";
+            }
+        }
+        return null;
+    }
 }
